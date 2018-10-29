@@ -10,10 +10,19 @@ Abilities = ("Barbarian Rage","2nd Wind","Action Surge","Upgrade Hit Dice","+1 A
 D6 = (1,6)
 
 Races = ("Elf","Human","Dwarf","Halfling","Gnome","Half-Elf","Half-Orc")
-# Str,Dex,Con,Wis,Int,Cha, # of Random Stat Boosts
 
-RacialStatBonuses = {"Elf":[0,2,0,1,1,1,4],"Human":[1,1,1,1,1,1,3],"Dwarf":[2,0,2,1,0,0,4],"Halfling":[0,2,1,1,0,1,4],"Gnome":[0,1,1,0,2,0,5],"Half-Elf":[1,1,1,1,1,2,2],"Half-Orc":[2,0,2,0,0,0,5]}
-RacialAbilities = {"Elf":["Dark-Vision 60","Sleep-Immune","Charm Resistant","Meditate for 4 Hours  = Long Rest"],"Human":[],"Dwarf":["Posion Resistant","Dark-Vision 60"]}
+# Str,Dex,Con,Wis,Int,Cha, # of Random Stat Boosts
+RacialStatBonuses = {"Elf":[0,2,0,1,1,1,4],
+                     "Human":[1,1,1,1,1,1,3],
+                     "Dwarf":[2,0,2,1,0,0,4],
+                     "Halfling":[0,2,1,1,0,1,4],
+                     "Gnome":[0,1,1,0,2,0,5],
+                     "Half-Elf":[1,1,1,1,1,2,2],
+                     "Half-Orc":[2,0,2,0,0,0,5]}
+RacialAbilities = {"Elf":["Dark-Vision 60","Sleep-Immune","Charm Resistant","Meditate for 4 Hours  = Long Rest"],
+                   "Human":[],
+                   "Dwarf":["Posion Resistant","Dark-Vision 60"]}
+
 class CharGenTab:
     Table = ()
     dice = (0,0)
