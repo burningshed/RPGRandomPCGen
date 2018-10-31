@@ -140,6 +140,7 @@ class CharStats:
     """
     StatList = ["Str", "Dex", "Con", "Wis", "Int", "Cha"]
     Stats = {"Str":0, "Dex":0, "Con":0, "Wis":0, "Int":0, "Cha":0}
+    StandardAbilities = []
     Abilities = []
     Race = ""
 
@@ -177,7 +178,7 @@ class CharStats:
         for _ in range(number):
             self.Abilities.append(table.roll())
 
-    def rollRace(self,RaceTab,RaceBonusTab):
+    def rollRace(self,RaceTab,RaceBonusTab,RacialAbil):
         """
         sets characters race atribute to result from provided table
         applies bonuses based on RaceBonusTab
@@ -188,6 +189,7 @@ class CharStats:
         for ii in range(len(StatBonuses)-1):
             stat = self.StatList[ii]
             self.Stats[stat] = self.Stats[stat] + StatBonuses[ii]
+        self.StandardAbilities = self.StandardAbilities + RacialAbil[self.Race]
 
     def incRandAbil(self, num):
         """used by rollRace, for random stat bonuses to help balance races"""
@@ -202,7 +204,9 @@ class CharStats:
             statString = statString + "\n" + stat + ": " + str(self.Stats[stat])
 
         return ("Race: " + self.Race +
-                "\nAbilities:\n" + '\n'.join(self.Abilities) + statString)
+                "\nBasic Abilities:\n" + '\n'.join(self.StandardAbilities) +
+                "\n---------------------\n"+
+                "Rolled Abilities:\n" + '\n'.join(self.Abilities) + statString)
 
 
 """
@@ -218,5 +222,5 @@ BasicAbilTable = CharGenTab(BasicAbilities, (1, len(BasicAbilities)))
 RaceTable = CharGenTab(Races, (1, len(Races)))
 Guy1 = CharStats(2, 2)
 Guy1.NewAbil(BasicAbilTable, 4)
-Guy1.rollRace(RaceTable, RacialStatBonuses)
+Guy1.rollRace(RaceTable, RacialStatBonuses, RacialAbilities)
 print(Guy1)
