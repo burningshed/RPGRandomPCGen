@@ -198,6 +198,17 @@ class CharStats:
             Abil = self.StatList[Abil]
             self.Stats[Abil] = self.Stats[Abil] + 1
 
+    def LvlUp(self, table, number):
+        """
+        Similar to NewAbil, but prints out the new abilities while adding them
+        (so it is easier to update character sheet)
+        """
+        Abil = []
+        for _ in range(number):
+            Abil = table.roll()
+            print(Abil)
+            self.Abilities.append(Abil)
+
     def __str__(self):
         statString = ""
         for stat in self.StatList:
@@ -216,11 +227,13 @@ Tier 2 - 5-10
 Tier 3 - 11-16
 Tier 4 - 17-20
 
-Tier 1 does not include level 1, keeping the level 1 table seperate
+Tier 1 includes starting abilities
 """
 BasicAbilTable = CharGenTab(BasicAbilities, (1, len(BasicAbilities)))
+Tier1AbilTable = CharGenTab(BasicAbilities+Tier1Abilities, (1,len(BasicAbilities+Tier1Abilities)))
 RaceTable = CharGenTab(Races, (1, len(Races)))
 Guy1 = CharStats(2, 2)
 Guy1.NewAbil(BasicAbilTable, 4)
 Guy1.rollRace(RaceTable, RacialStatBonuses, RacialAbilities)
 print(Guy1)
+#Guy1.LvlUp(Tier1AbilTable,1)
