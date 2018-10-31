@@ -51,31 +51,65 @@ Races = (
     "Halfling",
     "Gnome",
     "Half-Elf",
-    "Half-Orc"
+    "Half-Orc",
+    "IETS"
 )
 
 # Str,Dex,Con,Wis,Int,Cha, # of Random Stat Boosts
 RacialStatBonuses = {
-    "Elf":          [0,2,0,1,1,1,4],
-    "Human":        [1,1,1,1,1,1,3],
-    "Dwarf":        [2,0,2,1,0,0,4],
-    "Halfling":     [0,2,1,1,0,1,4],
-    "Gnome":        [0,1,1,0,2,0,5],
-    "Half-Elf":     [1,1,1,1,1,2,2],
-    "Half-Orc":     [2,0,2,0,0,0,5]
+    "Elf":          [0, 2, 0, 1, 1, 1, 4],
+    "Human":        [1, 1, 1, 1, 1, 1, 4],
+    "Dwarf":        [2, 0, 2, 1, 0, 0, 4],
+    "Halfling":     [0, 2, 1, 1, 0, 1, 4],
+    "Gnome":        [0, 1, 1, 0, 2, 0, 5],
+    "Half-Elf":     [1, 1, 1, 1, 1, 2, 2],
+    "Half-Orc":     [2, 0, 2, 0, 0, 0, 5],
+    "IETS":         [0, 0, 0, 0, 0, 0, 9]
 }
 
 RacialAbilities = {
     "Elf": [
+        "Speed: 35"
         "Dark-Vision 60",
         "Sleep-Immune",
         "Charm Resistant",
-        "Meditate for 4 Hours = Long Rest"
+        "Meditate for 4 Hours = Long Rest",
+        "Prof in Perception"
     ],
-    "Human":[],
+    "Human":[
+        "Speed: 30"],
     "Dwarf":[
+        "Speed: 25"
         "Posion Resistant",
-        "Dark-Vision 60"
+        "Dark-Vision 60",
+        "Advantage on history checks related to stone"
+    ],
+    "Halfling":[
+        "Speed: 25",
+        "Lucky (reroll first 1 on d20)",
+        "Advantage vs frightened",
+        "Hide behind larger creatures"
+    ],
+    "Gnome":[
+        "Speed: 25",
+        "Darkvision 60",
+        "Advantage on ST vs magic",
+        "Double Prof bonus related to magic items"
+    ],
+    "Half-Elf":[
+        "Speed: 30",
+        "Darkvision 60",
+        "Advantage vs charm/sleep"
+    ],
+    "Half-Orc":[
+        "Speed: 30",
+        "Darkvision 60",
+        "If reduced to 0, drop to 1 instead (1/LR)",
+        "Extra die when scoring crit"
+    ],
+    "IETS":[
+        "Speed: 1D6*10 (Reroll each combat round)",
+        "Roll 1d4-2 extra times on ability table"
     ]
 }
 class CharGenTab:
