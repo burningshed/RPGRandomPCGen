@@ -1,7 +1,7 @@
 import random
 import math
 
-Abilities = (
+BasicAbilities = (
     "Barbarian Rage",
     "2nd Wind",
     "Action Surge",
@@ -17,11 +17,31 @@ Abilities = (
     "Wis Bonus to AC",
     "Dex Bonus to AC",
     "Cha Bonus to AC",
+    "Int Bonus to AC",
     "Prof with All Armor Types",
     "All Martial Weapons",
     "Improvised Weapons and Armor"
 )
-
+Tier1Abilities = (
+    "Reckless Attack",
+    "Jack of All Trades",
+    "Song of Rest",
+    "Level 1 Spells (Divine)",
+    "Wild Shape",
+    "Improved Critical",
+    "Martial Arts",
+    "Lay on Hands",
+    "Cunning Action",
+    "Telepathy 30 feet",
+    "At will: Mage Armor",
+    "No longer sleeps",
+    "Can Speak with Animals",
+    "See in Magical Darkness",
+    "Any time you hit a creature with an attack, it's movement speed is reduced by 10'",
+    "Diguise Self at will",
+    "Silent Image at will",
+    "Gain a familiar"
+)
 D6 = (1,6)
 
 Races = (
@@ -151,10 +171,18 @@ class CharStats:
                 "\nAbilities:\n" + '\n'.join(self.Abilities) + statString)
 
 
+"""
+Basic Idea for leveling up - a different table which gets rolled on at each tier
+Tier 1 - 2-4
+Tier 2 - 5-10
+Tier 3 - 11-16
+Tier 4 - 17-20
 
-AbilTable = CharGenTab(Abilities, (1, len(Abilities)))
+Tier 1 does not include level 1, keeping the level 1 table seperate
+"""
+BasicAbilTable = CharGenTab(BasicAbilities, (1, len(BasicAbilities)))
 RaceTable = CharGenTab(Races, (1, len(Races)))
 Guy1 = CharStats(2, 2)
-Guy1.NewAbil(AbilTable, 4)
+Guy1.NewAbil(BasicAbilTable, 4)
 Guy1.rollRace(RaceTable, RacialStatBonuses)
 print(Guy1)
