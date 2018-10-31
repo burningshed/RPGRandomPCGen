@@ -58,24 +58,32 @@ RacialAbilities = {
         "Dark-Vision 60"
     ]
 }
-
 class CharGenTab:
-    Table = ()
-    dice = (0,0)
+    """
+    Rollable table object, takes an arbitrary length list and a tuple,
+    dice notation: xdy -> tuple: (x,y)
+    use roll method to return a value from the table
+    """
+    table = ()
+    dice = (0, 0)
 
     def __init__(self, newTab, dice):
-        self.Table = newTab
+        self.table = newTab
         self.dice = dice
 
     def roll(self):
+        """Using dice and table returns a value from table"""
         val = 0
-        for ii in range(self.dice[0]):
-            val = val + random.randint(0,self.dice[1]-1)
+        for _ in range(self.dice[0]):
+            val = val + random.randint(0, self.dice[1]-1)
 
-        return self.Table[val]
+        return self.table[val]
 
-class charStats:
-    # Should Rewrite this using a dictionary
+class CharStats:
+    """
+    Generates and stores the stats and abilities for new characters,
+    provide number of dice to roll and how many to keep to constructor.
+    """
     StatList = ["Str", "Dex", "Con", "Wis", "Int", "Cha"]
     Stats = {"Str":0, "Dex":0, "Con":0, "Wis":0, "Int":0, "Cha":0}
     Abilities = []
@@ -83,34 +91,43 @@ class charStats:
 
     def __init__(self, numDice, keep):
         for stat in self.StatList:
-            self.Stats[stat] = self.rollStat(numDice,keep)
+            self.Stats[stat] = self.rollStat(numDice, keep)
 
     def rollStat(self, numDice, keep):
+        """
+        takes number of dice and number to keep and returns a number roughly 1-20
+        (exact bounds will vary with number of dice kept)
+        """
         sides = math.floor(20/keep)
         keepers = [0] * keep
-        lowest = (0,20)
+        lowest = (0, 20)
         for ii in range(numDice):
-            roll = random.randint(1,sides)
+            roll = random.randint(1, sides)
             if ii < keep:
                 keepers[ii] = roll
                 if roll < lowest[1]:
-                    lowest = (ii,roll)
+                    lowest = (ii, roll)
             else:
                 if roll > lowest[1]:
                     keepers[lowest[0]] = roll
-                    lowest = (lowest[0],roll)
+                    lowest = (lowest[0], roll)
                     for jj in range(keep):
                         if keepers[jj] < lowest[1]:
-                            lowest = (jj,keepers[jj])
+                            lowest = (jj, keepers[jj])
         total = sum(keepers)
 
         return total
 
     def NewAbil(self, table, number):
-        for ii in range(number):
+        """Using provided table adds a number of new abilities equal to number"""
+        for _ in range(number):
             self.Abilities.append(table.roll())
 
     def rollRace(self,RaceTab,RaceBonusTab):
+        """
+        sets characters race atribute to result from provided table
+        applies bonuses based on RaceBonusTab
+        """
         self.Race = RaceTab.roll()
         StatBonuses = RaceBonusTab[self.Race]
         self.incRandAbil(StatBonuses[6])
@@ -119,7 +136,8 @@ class charStats:
             self.Stats[stat] = self.Stats[stat] + StatBonuses[ii]
 
     def incRandAbil(self, num):
-        for ii in range(num):
+        """used by rollRace, for random stat bonuses to help balance races"""
+        for _ in range(num):
             Abil = random.randint(0,len(self.StatList)-1)
             Abil = self.StatList[Abil]
             self.Stats[Abil] = self.Stats[Abil] + 1
@@ -130,13 +148,13 @@ class charStats:
             statString = statString + "\n" + stat + ": " + str(self.Stats[stat])
 
         return ("Race: " + self.Race +
-            "\nAbilities:\n" + '\n'.join(self.Abilities) + statString)
+                "\nAbilities:\n" + '\n'.join(self.Abilities) + statString)
 
 
 
-AbilTable = CharGenTab(Abilities,(1,len(Abilities)))
-RaceTable = CharGenTab(Races,(1,len(Races)))
-Guy1 = charStats(2,2)
-Guy1.NewAbil(AbilTable,4)
-Guy1.rollRace(RaceTable,RacialStatBonuses)
+AbilTable = CharGenTab(Abilities, (1, len(Abilities)))
+RaceTable = CharGenTab(Races, (1, len(Races)))
+Guy1 = CharStats(2, 2)
+Guy1.NewAbil(AbilTable, 4)
+Guy1.rollRace(RaceTable, RacialStatBonuses)
 print(Guy1)
