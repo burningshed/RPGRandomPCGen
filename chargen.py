@@ -112,6 +112,13 @@ class CharStats:
                 "\nBasic Abilities:\n" + '\n'.join(self.StandardAbilities) +
                 "\n---------------------\n"+
                 "Rolled Abilities:\n" + '\n'.join(self.Abilities) + statString)
+    def writeCharJSON(self, destFile):
+        charDict = {}
+        charDict["Race"] = self.Race
+        charDict["Stats"] = self.Stats
+        charDict["StandardAbilities"] = self.StandardAbilities
+        charDict["Abilities"] = self.Abilities
+        json.dump(charDict, destFile)
 
 
 """
@@ -137,3 +144,7 @@ Guy1.rollRace(RaceTable, tables["RacialStatBonuses"], tables["RacialAbilities"])
 print(Guy1)
 #Guy1.LvlUp(Tier1AbilTable,1)
 fp.close()
+
+testWrite = open("./charOutput.json",'w')
+Guy1.writeCharJSON(testWrite)
+testWrite.close()
