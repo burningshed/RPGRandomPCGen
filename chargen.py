@@ -119,6 +119,13 @@ class CharStats:
         charDict["StandardAbilities"] = self.StandardAbilities
         charDict["Abilities"] = self.Abilities
         json.dump(charDict, destFile)
+    def loadCharJSON(self, srcFile):
+        loadingChar = json.load(srcFile)
+        self.Race = loadingChar["Race"]
+        self.Stats = loadingChar["Stats"]
+        self.StandardAbilities = loadingChar["StandardAbilities"]
+        self.Abilities = loadingChar["Abilities"]
+
 
 
 """
@@ -148,3 +155,8 @@ fp.close()
 testWrite = open("./charOutput.json",'w')
 Guy1.writeCharJSON(testWrite)
 testWrite.close()
+
+#testLoad = open("./charOutput.json", 'r')
+#Guy1.loadCharJSON(testLoad)
+#testLoad.close()
+#print(Guy1)
